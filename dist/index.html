@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en" class="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flashcard Wizard</title>
+    <script>
+      // Apply the saved theme before first paint (mirrors src/lib/theme.ts)
+      try {
+        var t = JSON.parse(localStorage.getItem('fcw.theme') || '{}');
+        var dark = t.mode === 'dark' || ((t.mode || 'system') === 'system' && matchMedia('(prefers-color-scheme: dark)').matches);
+        var c = t.contrast || 'auto';
+        if (c === 'auto') c = matchMedia('(prefers-contrast: more)').matches ? 'high' : 'standard';
+        var h = document.documentElement;
+        h.className = (dark ? 'dark' : 'light') + (c === 'high' ? '-high-contrast' : c === 'medium' ? '-medium-contrast' : '');
+      } catch (e) {}
+    </script>
+    <script type="module" crossorigin src="/assets/index-hM6y7z9V.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-BxcstMIN.css">
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>

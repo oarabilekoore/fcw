@@ -1,0 +1,65 @@
+@import './styles/themes/light.css';
+@import './styles/themes/light-mc.css';
+@import './styles/themes/light-hc.css';
+@import './styles/themes/dark.css';
+@import './styles/themes/dark-mc.css';
+@import './styles/themes/dark-hc.css';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html { @apply font-sans antialiased; }
+  body { @apply bg-background text-foreground; }
+  h1, h2, h3 { @apply font-display tracking-tight; }
+  :focus-visible { outline: 3px solid var(--md-sys-color-primary); outline-offset: 2px; }
+  ::selection { background: var(--md-sys-color-primary-container); color: var(--md-sys-color-on-primary-container); }
+}
+
+/* Rubber duck motion — only plays when the person has not asked for reduced motion */
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes duck-bob { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-5px) } }
+  @keyframes duck-tilt { 0%,100% { transform: rotate(-3deg) } 50% { transform: rotate(5deg) } }
+  @keyframes duck-beak { 0%,100% { transform: scaleY(1) } 50% { transform: scaleY(1.45) } }
+  .duck-speaking { animation: duck-bob .5s ease-in-out infinite; transform-origin: 100px 180px; }
+  .duck-listening { animation: duck-tilt 1.6s ease-in-out infinite; transform-origin: 100px 180px; }
+  .duck-thinking { animation: duck-tilt 2.6s ease-in-out infinite; transform-origin: 100px 180px; }
+  .duck-speaking .beak { animation: duck-beak .25s ease-in-out infinite; transform-origin: 150px 92px; }
+}
+.katex-display { overflow-x: auto; overflow-y: hidden; }
+
+/* 3D Flip Card Styles */
+.perspective-card {
+  perspective: 1200px;
+}
+.transform-style-preserve-3d {
+  transform-style: preserve-3d;
+}
+.backface-hidden {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+.rotate-y-180 {
+  transform: rotateY(180deg);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .flip-card-inner {
+    transition: transform 0.55s cubic-bezier(0.25, 1, 0.3, 1);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .flip-card-inner {
+    transition: opacity 0.2s ease-in-out;
+  }
+}
+
+/* Audio wave animation for vocal mode */
+@keyframes voice-bar {
+  0%, 100% { height: 4px; opacity: 0.5; }
+  50% { height: 24px; opacity: 1; }
+}
+.voice-bar {
+  animation: voice-bar 0.9s ease-in-out infinite;
+}
+
